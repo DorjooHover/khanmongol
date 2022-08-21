@@ -20,7 +20,7 @@ export class GroupCreateDto {
 
     @IsNotEmpty()
     @IsArray()
-    lessons: [{
+lessons: [{
         id: string
     }]
 
