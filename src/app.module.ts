@@ -5,7 +5,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import configration from './config/configration';
 import { AuthModule, UserModule } from './resource/';
 import { CategoryModule } from './resource/category/category.module';
+import { CommentModule } from './resource/comment/comment.module';
 import { GroupModule } from './resource/group/group.module';
+import { LessonModule } from './resource/lesson/lesson.module';
 import { LevelModule } from './resource/levels/level.module';
 
 @Module({
@@ -31,6 +33,8 @@ import { LevelModule } from './resource/levels/level.module';
     CategoryModule,
     LevelModule,
     GroupModule,
+    LessonModule,
+    CommentModule
   ],
 
 })
