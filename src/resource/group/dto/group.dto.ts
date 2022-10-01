@@ -1,61 +1,112 @@
-import { IsArray, IsNotEmpty, IsString } from "class-validator";
-
+import { ApiProperty } from '@nestjs/swagger';
+import { IsArray, IsNotEmpty, IsString } from 'class-validator';
 
 export class GroupCreateDto {
-    @IsNotEmpty()
-    @IsString()
-    name: string
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
+  name: string;
 
-    @IsNotEmpty()
-    @IsArray()
-    categories: [{
-        id: string
-    }]
-    
-    @IsNotEmpty()
-    @IsArray()
-    students: [{
-        id: string
-    }]
+  @IsNotEmpty()
+  @IsArray()
+  @ApiProperty()
+  categories: [
+    {
+      id: string;
+    },
+  ];
 
-    @IsNotEmpty()
-    @IsArray()
-lessons: [{
-        id: string
-    }]
+  @IsNotEmpty()
+  @IsArray()
+  @ApiProperty()
+  students: [
+    {
+      id: string;
+    },
+  ];
 
-    @IsNotEmpty()
-    @IsString()    
-    teacher: string
+  @IsNotEmpty()
+  @IsArray()
+  @ApiProperty()
+  lessons: [
+    {
+      id: string;
+    },
+  ];
 
-    @IsNotEmpty()
-    @IsString()
-    level: string
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
+  teacher: string;
 
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
+  level: string;
 }
 
 export class GroupUpdateDto {
-    @IsString()
-    name: string
+  @IsString()
+  @ApiProperty()
+  name: string;
 
-    @IsArray()
-    categories: [{
-        id: string
-    }]
-    
-    @IsArray()
-    students: [{
-        id: string
-    }]
+  @IsArray()
+  @ApiProperty()
+  categories: [
+    {
+      id: string;
+    },
+  ];
 
-    @IsArray()
-    lessons: [{
-        id: string
-    }]
+  @IsArray()
+  @ApiProperty()
+  students: [
+    {
+      id: string;
+    },
+  ];
 
-    @IsString()    
-    teacher: string
+  @IsArray()
+  @ApiProperty()
+  lessons: [
+    {
+      id: string;
+    },
+  ];
 
-    @IsString()
-    level: string
+  @IsString()
+  @ApiProperty()
+  teacher: string;
+
+  @IsString()
+  @ApiProperty()
+  level: string;
+}
+
+export class StudentDto {
+  @IsArray()
+  @ApiProperty()
+  students: [
+    {
+      id: string
+    }
+  ]
+
+  @IsString()
+  @ApiProperty()
+  name: string
+}
+export class LessonDto {
+  @IsArray()
+  @ApiProperty()
+  @IsNotEmpty()
+  lessons: [
+    {
+      id: string
+    }
+  ]
+  @IsString()
+  @ApiProperty()
+  @IsNotEmpty()
+  name: string
 }

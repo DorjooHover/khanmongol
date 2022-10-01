@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { GroupCreateDto, GroupUpdateDto } from "./dto/group.dto";
+import {  GroupCreateDto, GroupUpdateDto, StudentDto } from "./dto/group.dto";
 import { GroupService } from "./group.service";
 
 @Controller('group')
@@ -9,6 +9,15 @@ export class GroupController {
     @Post()
     create(@Body() dto: GroupCreateDto) {
         return this.service.create(dto)
+    }
+
+    @Post('students')
+    addStudent(@Body() dto: StudentDto) {
+        return this.service.addStudent(dto)
+    }
+    @Delete('students')
+    removeStudent(@Body() dto: StudentDto) {
+        return this.service.removeStudent(dto)
     }
 
     @Get()

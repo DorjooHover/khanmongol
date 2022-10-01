@@ -2,7 +2,7 @@ import { ForbiddenException, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Group, GroupDocument } from "src/model";
-import { GroupCreateDto, GroupUpdateDto } from "./dto/group.dto";
+import {  GroupCreateDto, GroupUpdateDto, LessonDto, StudentDto } from "./dto/group.dto";
 
 @Injectable()
 export class GroupService {
@@ -72,6 +72,87 @@ export class GroupService {
         }
 
         await this.model.findOneAndDelete({name})
+        return group
+    }
+
+    async addStudent(dto:StudentDto) {
+        let group = await this.model.findOne({name:dto.name})
+
+        if(!group) {
+            throw new ForbiddenException('not found this group')
+        }
+        let students = group.students
+        if(dto.students.length > 0) {
+            dto.students.map((s) => {
+                students.push(s)
+            })
+        }
+        group = await this.model.findOneAndUpdate({name: dto.name}, {
+            students: students
+        })
+        return group
+    }
+    async removeStudent (dto: StudentDto) {
+        let group = await this.model.findOne({name:dto.name})
+
+        if(!group) {
+            throw new ForbiddenException('not found this group')
+        }
+        let students = group.students
+        let newStudents
+        if(dto.students.length > 0) {
+    
+            dto.students.map((s) => {
+                newStudents = students.filter(function(e) {
+                    return e != s
+                })
+            })
+        }
+        
+        group = await this.model.findOneAndUpdate({name: dto.name}, {
+            students: newStudents
+        })
+        return group
+    }
+
+    async addLesson(dto:LessonDto) {
+        let group = await this.model.findOne({name:dto.name})
+
+        if(!group) {
+            throw new ForbiddenException('not found this group')
+        }
+        let lessons = group.lessons
+        if(dto.lessons.length > 0) {
+            dto.lessons.map((s) => {
+                lessons.push(s)
+            })
+        }
+        group = await this.model.findOneAndUpdate({name: dto.name}, {
+            lessons: lessons
+        })
+        return group
+    }
+
+    async removeLesson (dto: LessonDto) {
+        let group = await this.model.findOne({name:dto.name})
+
+        if(!group) {
+            throw new ForbiddenException('not found this group')
+        }
+        let lessons = group.lessons
+        let newlessons
+        if(dto.lessons.length > 0) {
+    
+            dto.lessons.map((s) => {
+                newlessons = lessons.filter(function(e) {
+                    return e != s
+                })
+            })
+        }
+        
+        group = await this.model.findOneAndUpdate({name: dto.name}, {
+            students: newlessons
+        })
         return group
     }
 }
